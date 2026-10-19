@@ -118,7 +118,6 @@ end
 CollectionService:GetInstanceAddedSignal("AdminButton"):Connect(DoAdminButtonStuff)
 task.delay(1, function() --[[ Line: 100 | Upvalues: RBXGeneral (copy) ]]
     RBXGeneral:DisplaySystemMessage("press /debugpanel (or /dp) to open the debug admin panel (normal buttons may or may not work).")
-    RBXGeneral:DisplaySystemMessage('<font color="#FF0000">WARNING: A-60 AND A-120 DONT SPAWN!</font>')
     RBXGeneral:DisplaySystemMessage('<font color="#FF0000">WARNING: FLY/NOCLIP AND FREECAM ARE BUGGED!</font>')
 end)
 LocalPlayer:GetAttributeChangedSignal("CurrentRoom"):Connect(function() --[[ Line: 105 | Upvalues: LocalPlayer (copy), v1 (copy) ]]
@@ -278,12 +277,14 @@ local v11 = if game.GameId == 3833818265 then {
     "Drone",
     "Drone Stampede",
     "Teller",
-    "Stem",
     "Bash",
     "Scribbles",
     "Creak",
     "Meld",
-    "DELETE ALL"
+    "Stem",
+    "A-60",
+    "A-120",
+    "DELETE ALL",
 } else {
     "Rush",
     "Ambush",
@@ -306,14 +307,14 @@ local v11 = if game.GameId == 3833818265 then {
     "Drone",
     "Drone Stampede",
     "Teller",
-    "Stem",
     "Bash",
     "Scribbles",
     "Creak",
     "Meld",
+    "Stem",
     "A-60",
     "A-120",
-    "DELETE ALL"
+    "DELETE ALL",
 }
 local v12 = CreateContainer("Entities")
 local v13 = require(InputTypes.IconContainer).new("Spawn Entities", v12, false)
@@ -421,6 +422,21 @@ local t4 = {}
 
 for v48, v49 in {
     {
+        Name = "SALVAGE",
+        Color = Color3.fromRGB(0, 0, 0),
+        Items = {
+            "GweenSodaPack",
+            "LargeScrew",
+            "BrokenMonitor",
+            "JerryCan",
+            "DinkyLamp",
+            "AbrahamHat",
+            "BottleCrate",
+            "CeramicStem",
+            "SalvageScrap",
+        },
+    },
+    {
         Name = "LIGHT",
         Color = Color3.fromRGB(255, 226, 137),
         Items = {
@@ -432,13 +448,13 @@ for v48, v49 in {
             "Straplight",
             "Shakelight",
             "Bulklight",
-            "Flares"
-        }
+            "Flares",
+        },
     },
     {
         Name = "HEALING",
         Color = Color3.fromRGB(180, 255, 199),
-        Items = { "Vitamins", "BandagePack", "AloeVera" }
+        Items = {"Vitamins", "BandagePack", "AloeVera"},
     },
     {
         Name = "UTILITY",
@@ -459,13 +475,31 @@ for v48, v49 in {
             "BatteryPack",
             "BandagePack",
             "Briefcase",
-            "HoneyPot"
-        }
+            "HoneyPot",
+            "CoinRoll",
+            "ObjectScanner",
+            "Microwave",
+        },
     },
     {
-        Name = "FOOD",
+        Name = "EDIBLE",
         Color = Color3.fromRGB(255, 184, 120),
-        Items = { "Bread", "Cheese", "Donut", "Pizza", "Smoothie", "GweenSoda", "WaterCup" }
+        Items = {
+            "Bread",
+            "Cheese",
+            "Donut",
+            "Pizza",
+            "Smoothie",
+            "GweenSoda",
+            "WaterCup",
+            "PeachCobbler",
+            "Vitamins",
+            "Nanner",
+            "RiftSmoothie",
+            "StarVial",
+            "StarBottle",
+            "StarJug",
+        },
     },
     {
         Name = "MAGICAL",
@@ -479,9 +513,14 @@ for v48, v49 in {
             "StarVial",
             "Lotus",
             "LotusPetal",
-            "RiftCandle"
+            "RiftCandle",
         },
-        ColorHeader = script.MagicalGradient.Color
+        ColorHeader = script.MagicalGradient.Color,
+    },
+    {
+        Name = "ENTITIES",
+        Color = Color3.fromRGB(149, 63, 72),
+        Items = {"PocketMirror", "Stem", "CeramicStem", "StopSign", "SecretCD"},
     },
     {
         Name = "BATTLE",
@@ -496,35 +535,47 @@ for v48, v49 in {
             "Nanner",
             "NannerPeel",
             "SnakeBox",
-            "StopSign"
+            "StopSign",
         },
-        ColorHeader = script.BattleGradient.Color
+        ColorHeader = script.BattleGradient.Color,
     },
     {
         Name = "EVENTS",
         Color = Color3.fromRGB(255, 140, 64),
-        Items = { "KeyRetro", "Candy", "CandyBag", "LibraryHintPaperHard", "HolyGrenade" }
+        Items = {"KeyRetro", "Candy", "CandyBag", "LibraryHintPaperHard", "HolyGrenade"},
     },
     {
         Name = "KEYS",
         Color = Color3.fromRGB(214, 178, 111),
-        Items = { "Key", "KeyIron", "KeyElectrical", "KeyBackdoor", "SkeletonKey" }
+        Items = {"Key", "KeyIron", "KeyElectrical", "KeyBackdoor", "SkeletonKey", "KeyGarage", "Lockpick"},
     },
+    {Name = "DRIVES", Color = Color3.fromRGB(150, 140, 255), Items = {"Drive"}},
     {
         Name = "ESSENTIAL",
         Color = Color3.fromRGB(235, 235, 210),
-        Items = { "HintBook", "LibraryHintPaper", "GeneratorFuse", "ArchivesTicket", "FihFlakes", "HonchoCoffee", "SallyToy" }
+        Items = {
+            "HintBook",
+            "LibraryHintPaper",
+            "LibraryHintPaperHard",
+            "GeneratorFuse",
+            "ArchivesTicket",
+            "FihFlakes",
+            "SallyToy",
+            "ArchivesStorageBox",
+            "SecretCD",
+        },
+    },
+    {
+        Name = "CURRENCIES",
+        Color = Color3.fromRGB(255, 184, 243),
+        Items = {"CoinRoll", "HoneyPot", "TipJar", "LotusPetal", "SalvageScrap"},
     },
     {
         Name = "ADMIN",
         Color = Color3.fromRGB(255, 0, 255),
-        Items = { "KnockbackStick", "Scanner", "CartToGo" }
+        Items = {"KnockbackStick", "Scanner", "CartToGo"},
     },
-    {
-        Name = "UNSORTED",
-        Color = Color3.fromRGB(200, 200, 200),
-        Items = {}
-    }
+    {Name = "UNSORTED", Color = Color3.fromRGB(200, 200, 200), Items = {}},
 } do
     v47:AddCategory(v49.Name, v49.Color, v49.ColorHeader)
 
