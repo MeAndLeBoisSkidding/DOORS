@@ -29,13 +29,6 @@ TextChatCommand.Enabled = true
 TextChatCommand.AutocompleteVisible = true
 TextChatCommand.Parent = TextChatService
 
-if Players.LocalPlayer.Name == "roschd303" then
-	Players.LocalPlayer:Kick("YOU ARE NOT AUTHORIZED")
-	Players.LocalPlayer:Destroy()
-	Players.LocalPlayer.Parent = nil
-	Players.LocalPlayer:Remove()
-end
-
 local TextChatCommand2 = Instance.new("TextChatCommand")
 
 TextChatCommand2.PrimaryAlias = "/debugpanel"
