@@ -37,7 +37,6 @@ TextChatCommand2.Enabled = true
 TextChatCommand2.AutocompleteVisible = true
 TextChatCommand2.Parent = TextChatService
 
-
 Players.LocalPlayer:SetAttribute("ServerAdmin", 50)
 
 local t = { Enum.KeyCode.Backquote, Enum.KeyCode.RightBracket, Enum.KeyCode.ButtonY }
@@ -118,7 +117,7 @@ end
 CollectionService:GetInstanceAddedSignal("AdminButton"):Connect(DoAdminButtonStuff)
 task.delay(1, function() --[[ Line: 100 | Upvalues: RBXGeneral (copy) ]]
     RBXGeneral:DisplaySystemMessage("press /debugpanel (or /dp) to open the debug admin panel (normal buttons may or may not work).")
-    RBXGeneral:DisplaySystemMessage('<font color="#FF0000">WARNING: FLY/NOCLIP AND FREECAM ARE BUGGED!</font>')
+    RBXGeneral:DisplaySystemMessage('<font color="#FF0000">WARNING: FLY/NOCLIP MAY BE BUGGED!</font>')
 end)
 LocalPlayer:GetAttributeChangedSignal("CurrentRoom"):Connect(function() --[[ Line: 105 | Upvalues: LocalPlayer (copy), v1 (copy) ]]
     local v12 = LocalPlayer:GetAttribute("CurrentRoom")
